@@ -30,7 +30,6 @@ const Resume = () => {
     e.preventDefault();
     const doc = new jsPDF();
 
-    // Adding Personal Information to the PDF
     doc.text(`Name: ${formData.name}`, 10, 10);
     doc.text(`Title: ${formData.title}`, 10, 20);
     doc.text(`Phone: ${formData.phone}`, 10, 30);
@@ -38,47 +37,39 @@ const Resume = () => {
     doc.text(`Website: ${formData.website}`, 10, 50);
     doc.text(`Address: ${formData.address}`, 10, 60);
     
-    // Adding About Me to the PDF
     doc.text('About Me:', 10, 70);
     doc.text(formData.aboutMe, 10, 80);
 
-    // Adding Education
     doc.text('Education:', 10, 100);
     formData.education.forEach((edu, index) => {
       doc.text(`${edu.degree} - ${edu.institution} (${edu.year})`, 10, 110 + (index * 10));
     });
 
-    // Adding Work Experience
     doc.text('Work Experience:', 10, 140);
     formData.workExperience.forEach((exp, index) => {
       doc.text(`${exp.title} at ${exp.company} (${exp.date})`, 10, 150 + (index * 10));
       doc.text(exp.description, 10, 160 + (index * 10));
     });
 
-    // Adding Expertise
     doc.text('Expertise:', 10, 200);
     doc.text(formData.expertise, 10, 210);
 
-    // Adding Languages
     doc.text('Languages:', 10, 230);
     const languagesList = [];
     if (formData.languages.english) languagesList.push('English');
     if (formData.languages.french) languagesList.push('French');
     doc.text(languagesList.join(', '), 10, 240);
 
-    // Adding References
     doc.text('References:', 10, 250);
     formData.references.forEach((ref, index) => {
       doc.text(`${ref.name} (${ref.position}) - ${ref.phone} | ${ref.email}`, 10, 260 + (index * 10));
     });
 
-    // Save the PDF
     doc.save(`${formData.name}_resume.pdf`);
   };
 
   return (
     <form className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md" onSubmit={handleSubmit}>
-      {/* Personal Information */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">Personal Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -133,7 +124,6 @@ const Resume = () => {
         </div>
       </div>
 
-      {/* About Me */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">About Me</h2>
         <textarea
@@ -146,7 +136,6 @@ const Resume = () => {
         ></textarea>
       </div>
 
-      {/* Education */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">Education</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -177,7 +166,6 @@ const Resume = () => {
         </div>
       </div>
 
-      {/* Work Experience */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">Work Experience</h2>
         {formData.workExperience.map((exp, index) => (
@@ -218,7 +206,6 @@ const Resume = () => {
         ))}
       </div>
 
-      {/* Expertise */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">Expertise</h2>
         <textarea
@@ -231,7 +218,6 @@ const Resume = () => {
         ></textarea>
       </div>
 
-      {/* Languages */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">Languages</h2>
         <div className="flex items-center space-x-4">
@@ -258,7 +244,6 @@ const Resume = () => {
         </div>
       </div>
 
-      {/* References */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">References</h2>
         {formData.references.map((ref, index) => (
